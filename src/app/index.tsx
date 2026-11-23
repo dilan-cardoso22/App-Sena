@@ -1,25 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 View,
 Text,
 StyleSheet,
-SafeAreaView
+SafeAreaView,
+TouchableOpacity
 } from 'react-native';
 
 export default function App() {
+const [cantidad, setCantidad] = useState(1);
+
 return (
 <SafeAreaView style={styles.container}>
 
 <Text style={styles.title}>APP SENA</Text>
 
 <View style={styles.card}>
-<Text style={styles.product}>
-Producto
-</Text>
 
-<Text style={styles.price}>
-$10.000
-</Text>
+<Text style={styles.producto}>Producto</Text>
+
+<Text style={styles.precio}>$10.000</Text>
+
+<View style={styles.controles}>
+
+<TouchableOpacity
+style={styles.boton}
+onPress={() => setCantidad(cantidad + 1)}
+>
+<Text style={styles.botonTexto}>+</Text>
+</TouchableOpacity>
+
+<Text style={styles.cantidad}>{cantidad}</Text>
+
+<TouchableOpacity
+style={styles.boton}
+onPress={() => setCantidad(
+Math.max(0, cantidad - 1)
+)}
+>
+<Text style={styles.botonTexto}>−</Text>
+</TouchableOpacity>
+
+</View>
+
 </View>
 
 </SafeAreaView>
@@ -29,7 +52,7 @@ $10.000
 const styles = StyleSheet.create({
 container: {
 flex: 1,
-backgroundColor: '#ffffff',
+backgroundColor: '#fff',
 alignItems: 'center',
 justifyContent: 'center',
 },
@@ -41,22 +64,47 @@ marginBottom: 15,
 },
 
 card: {
-width: 170,
-height: 105,
+width: 190,
+height: 125,
 borderWidth: 2,
-borderColor: '#333333',
-borderRadius: 15,
+borderColor: '#333',
+borderRadius: 18,
 alignItems: 'center',
 justifyContent: 'center',
 },
 
-product: {
+producto: {
 fontSize: 18,
 fontWeight: 'bold',
 },
 
-price: {
+precio: {
+fontSize: 18,
+marginBottom: 8,
+},
+
+controles: {
+flexDirection: 'row',
+alignItems: 'center',
+gap: 15,
+},
+
+boton: {
+width: 28,
+height: 28,
+borderWidth: 1,
+borderColor: '#333',
+alignItems: 'center',
+justifyContent: 'center',
+},
+
+botonTexto: {
+fontSize: 22,
+fontWeight: 'bold',
+},
+
+cantidad: {
 fontSize: 20,
-marginTop: 5,
+fontWeight: 'bold',
 },
 });
